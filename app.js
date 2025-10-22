@@ -9,13 +9,15 @@ app.use(express.json());
 app.use(cors());
 app.use(logger);
 app.use(express.static("public"));
+import path from "path";
+const DATA_FILE = path.join(process.cwd(), "data.json");
 
 const PORT = process.env.PORT || 3000;
 
 //function for reading
 async function readData(){
     try {
-        const content = await fs.readFile("./data_file", "utf8");
+        const content = await fs.readFile(DATA_FILE, "utf8");
         return JSON.parse(content);
     }catch(err){
         if(err.code === ENOENT) return [];
@@ -24,7 +26,7 @@ async function readData(){
 }
 //function for writing
 async function writeData(data){
-    await fs.writeFile("./data_file", JSON.stringify(data, null, 2));
+    await fs.writeFile(DATA_FILE, JSON.stringify(data, null, 2));
 }
 
 //POST
