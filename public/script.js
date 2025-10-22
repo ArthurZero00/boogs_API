@@ -1,4 +1,4 @@
-// script.js (frontend that matches your server's PUT /books)
+
 const API_BASE = "/books";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function fillForEdit(book) {
-    idInput.value = book.id;          // IMPORTANT: server expects id in body
+    idInput.value = book.id;          
     titleInput.value = book.title;
     authorInput.value = book.author;
     yearInput.value = book.year;
@@ -42,14 +42,14 @@ document.addEventListener("DOMContentLoaded", () => {
   form.onsubmit = async e => {
     e.preventDefault();
     const payload = {
-      id: idInput.value || undefined,     // include id when updating
+      id: idInput.value || undefined,     
       title: titleInput.value,
       author: authorInput.value,
       year: Number(yearInput.value)
     };
 
     if (idInput.value) {
-      // Match your server: PUT to /books with JSON body that includes id
+      
       await fetch(`${API_BASE}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
