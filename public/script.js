@@ -1,5 +1,5 @@
 // script.js (frontend that matches your server's PUT /books)
-const API_BASE = "/books; // or '' if same origin
+const API_BASE = "/books";
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("bookForm");
