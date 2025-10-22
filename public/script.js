@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const yearInput = document.getElementById("year");
 
   async function loadBooks() {
-    const res = await fetch(`${API_BASE}/books`);
+    const res = await fetch(`${API_BASE}`);
     const books = await res.json();
     booksList.innerHTML = "";
     books.forEach(b => {
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   async function deleteBook(id) {
-    await fetch(`${API_BASE}/books/${id}`, { method: "DELETE" });
+    await fetch(`${API_BASE}/${id}`, { method: "DELETE" });
     loadBooks();
   }
 
@@ -50,13 +50,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (idInput.value) {
       // Match your server: PUT to /books with JSON body that includes id
-      await fetch(`${API_BASE}/books`, {
+      await fetch(`${API_BASE}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       });
     } else {
-      await fetch(`${API_BASE}/books`, {
+      await fetch(`${API_BASE}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
