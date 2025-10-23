@@ -9,8 +9,8 @@ app.use(express.json());
 app.use(cors());
 app.use(logger);
 app.use(express.static("public"));
-import path from "path";
-const DATA_FILE = path.join(process.cwd(), "data.json");
+//import path from "path";
+//const DATA_FILE = path.join(process.cwd(), "data.json");
 
 const PORT = process.env.PORT || 3000;
 
