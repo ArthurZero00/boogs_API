@@ -11,7 +11,7 @@ app.use(logger);
 app.use(express.static("public"));
 //import path from "path";
 //const DATA_FILE = path.join(process.cwd(), "data.json");
-
+const DATA_FILE = "./data.json"
 const PORT = process.env.PORT || 3000;
 
 //function for reading
