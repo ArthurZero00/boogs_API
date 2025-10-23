@@ -10,6 +10,9 @@ export function validateBook(req, res, next) {
     ) {
       return res.status(400).json({ error: "Invalid input: all values are required." });
     }
+    if(year < 0){
+      return res.status(400).json({error: "Year is not valid!"});
+    }
   
     next();
   }

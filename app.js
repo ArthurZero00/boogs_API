@@ -9,8 +9,7 @@ app.use(express.json());
 app.use(cors());
 app.use(logger);
 app.use(express.static("public"));
-//import path from "path";
-//const DATA_FILE = path.join(process.cwd(), "data.json");
+
 const DATA_FILE = "data.json"
 const PORT = process.env.PORT || 3000;
 
@@ -20,7 +19,7 @@ async function readData(){
         const content = await fs.readFile(DATA_FILE, "utf8");
         return JSON.parse(content);
     }catch(err){
-        if(err.code === ENOENT) return [];
+        if(err.code === "ENOENT") return [];
         throw err;
     }
 }
@@ -47,7 +46,7 @@ app.post("/books", validateBook,async (req, res) => {
 app.get("/books",async (req, res) => {
     const books = await readData();
     
-    res.status(201).json(books);
+    res.status(200).json(books);
     
 })
 
@@ -60,7 +59,7 @@ app.get("/books/:id", async (req,res) => {
     if(!book){
         return res.status(404).json({ error: "Book not found"});
     }
-    res.status(201).json(book);
+    res.status(200).json(book);
 }
 );
 
@@ -75,7 +74,7 @@ app.put("/books", validateBook, async (req,res) => {
     books[index].author = req.body.author.trim();
     books[index].year = req.body.year;
     await writeData(books);
-    res.status(201).json({ success: "Book successfully updated!"})
+    res.status(200).json({ success: "Book successfully updated!"})
 })
 
 
@@ -88,9 +87,9 @@ app.delete("/books/:id", async (req,res) => {
         res.status(404).json({ error:"Book not found!"});
     }
     await writeData(filtered);
-    res.status(201).json({ success: "Book succesfully deleted!"});
+    res.status(200).json({ success: "Book succesfully deleted!"});
     
 })
 app.listen(PORT, () => {
-    console.log(`Listening on port ${PORT}...`)
+    console.log(`Server running on port ${PORT}...`)
 })
